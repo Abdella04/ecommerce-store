@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Trash2, Minus, Plus, ArrowLeft, ShoppingBag } from 'lucide-react';
 import { useCart } from '@/contexts/CartContext';
@@ -33,7 +34,7 @@ export default function CartPage() {
                     <div className="text-center py-12">
                         <ShoppingBag className="h-16 w-16 text-gray-400 mx-auto mb-4" />
                         <h2 className="text-2xl font-bold text-gray-900 mb-2">Your cart is empty</h2>
-                        <p className="text-gray-600 mb-8">Looks like you haven't added any items to your cart yet.</p>
+                        <p className="text-gray-600 mb-8">Looks like you haven&apos;t added any items to your cart yet.</p>
                         <Link
                             href="/products"
                             className="inline-flex items-center space-x-2 bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
@@ -69,9 +70,11 @@ export default function CartPage() {
                                 {safeCart.map((item) => (
                                     <div key={`${item.product.id}-${item.size}`} className="p-6">
                                         <div className="flex items-center space-x-4">
-                                            <img
+                                            <Image
                                                 src={item.product.image}
                                                 alt={item.product.name}
+                                                width={80}
+                                                height={80}
                                                 className="w-20 h-20 object-cover rounded-lg"
                                             />
 

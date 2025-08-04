@@ -30,23 +30,25 @@ export const useCart = () => {
 };
 
 // Helper function to validate cart item
-const isValidCartItem = (item: any): item is CartItem => {
+const isValidCartItem = (item: unknown): item is CartItem => {
     return (
-        item &&
+        item !== null &&
         typeof item === 'object' &&
-        item.product &&
-        typeof item.product === 'object' &&
-        typeof item.product.id === 'string' &&
-        typeof item.product.name === 'string' &&
-        typeof item.product.price === 'number' &&
-        typeof item.product.description === 'string' &&
-        typeof item.product.image === 'string' &&
-        typeof item.product.category === 'string' &&
-        typeof item.product.inStock === 'boolean' &&
-        Array.isArray(item.product.sizes) &&
-        typeof item.quantity === 'number' &&
-        item.quantity > 0 &&
-        typeof item.size === 'string'
+        'product' in item &&
+        'quantity' in item &&
+        'size' in item &&
+        typeof (item as CartItem).product === 'object' &&
+        typeof (item as CartItem).product.id === 'string' &&
+        typeof (item as CartItem).product.name === 'string' &&
+        typeof (item as CartItem).product.price === 'number' &&
+        typeof (item as CartItem).product.description === 'string' &&
+        typeof (item as CartItem).product.image === 'string' &&
+        typeof (item as CartItem).product.category === 'string' &&
+        typeof (item as CartItem).product.inStock === 'boolean' &&
+        Array.isArray((item as CartItem).product.sizes) &&
+        typeof (item as CartItem).quantity === 'number' &&
+        (item as CartItem).quantity > 0 &&
+        typeof (item as CartItem).size === 'string'
     );
 };
 

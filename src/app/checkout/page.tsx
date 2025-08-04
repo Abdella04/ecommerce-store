@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useCart } from '@/contexts/CartContext';
 import { Truck, CheckCircle } from 'lucide-react';
@@ -233,9 +234,11 @@ export default function CheckoutPage() {
                                 {safeCart.map((item) => (
                                     <div key={`${item.product.id}-${item.size}`} className="flex justify-between items-center">
                                         <div className="flex items-center space-x-3">
-                                            <img
+                                            <Image
                                                 src={item.product.image}
                                                 alt={item.product.name}
+                                                width={48}
+                                                height={48}
                                                 className="w-12 h-12 object-cover rounded"
                                             />
                                             <div>
