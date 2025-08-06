@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ShopStore - Your Online Shopping Destination",
+  title: "Krvst Store - Your Online Shopping Destination",
   description: "Discover amazing products at great prices. Shop electronics, clothing, accessories, and more.",
 };
 
