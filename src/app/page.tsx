@@ -16,7 +16,7 @@ export default function HomePage() {
               Welcome to Krvst Store
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-blue-100">
-              Discover amazing t-shirts at unbeatable prices
+              Discover amazing t-shirts 
             </p>
             <Link
               href="/products"
