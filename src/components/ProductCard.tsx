@@ -7,7 +7,7 @@ import { useCart } from '@/contexts/CartContext';
 import { ShoppingCart } from 'lucide-react';
 
 interface ProductCardProps {
-  product: Product;  // Use the Product interface we imported
+    product: Product;  // Use the Product interface we imported
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
@@ -64,11 +64,10 @@ export default function ProductCard({ product }: ProductCardProps) {
                             <button
                                 key={size}
                                 onClick={() => setSelectedSize(size)}
-                                className={`px-4 py-2 text-sm font-medium rounded-lg transition-all ${
-                                    selectedSize === size
-                                    ? 'bg-blue-600 text-white shadow-md'
-                                    : 'bg-gray-50 text-gray-700 hover:bg-gray-100'
-                                } button-effect`}
+                                className={`px-4 py-2 text-sm font-medium rounded-lg transition-all ${selectedSize === size
+                                        ? 'bg-blue-600 text-white shadow-md'
+                                        : 'bg-gray-50 text-gray-700 hover:bg-gray-100'
+                                    } button-effect`}
                             >
                                 {size}
                             </button>
@@ -82,7 +81,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                     className={`w-full flex items-center justify-center space-x-2 px-6 py-3 rounded-lg text-sm font-semibold transition-all ${product.inStock && selectedSize
                         ? 'bg-blue-600 text-white hover:bg-blue-700 button-effect'
                         : 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                    }`}
+                        }`}
                 >
                     <ShoppingCart className="h-5 w-5" />
                     <span>

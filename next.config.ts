@@ -1,8 +1,8 @@
-import type { NextConfig } from "next";
+import { NextConfig } from "next";
 
-const nextConfig = {
+const nextConfig: NextConfig = {
   images: {
-    domains: ['images.unsplash.com'], // If you're using external images
+    domains: ['images.unsplash.com'],
     remotePatterns: [
       {
         protocol: 'https',
@@ -10,5 +10,9 @@ const nextConfig = {
       },
     ],
   },
-}
-module.exports = nextConfig
+  typescript: {
+    strictNullChecks: true,
+  },
+};
+
+export default nextConfig;

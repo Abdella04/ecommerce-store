@@ -34,18 +34,51 @@ export default function CheckoutPage() {
         }));
     };
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setIsSubmitting(true);
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setIsSubmitting(true);
 
-        // Simulate order processing
-        await new Promise(resolve => setTimeout(resolve, 2000));
-
-        // Clear cart and show success
-        clearCart();
-        setOrderComplete(true);
-        setIsSubmitting(false);
+  try {
+    // prepare data for Formspree
+    const payload = {
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      phone: formData.phone,
+      city: formData.city,
+      subtotal,
+      shipping,
+      total,
+      cart: safeCart.map(item => ({
+        product: item.product.name,
+        size: item.size,
+        quantity: item.quantity,
+        price: item.product.price,
+      })),
     };
+
+    const response = await fetch("https://formspree.io/f/mzzvanod", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (response.ok) {
+      clearCart();
+      setOrderComplete(true);
+    } else {
+      alert("Something went wrong, please try again.");
+    }
+  } catch (error) {
+    console.error(error);
+    alert("Failed to submit order.");
+  } finally {
+    setIsSubmitting(false);
+  }
+};
+
 
     // Safety checks for cart data
     const safeCart = cart.filter(item => item && item.product && item.product.id);
