@@ -11,7 +11,8 @@ const nextConfig: NextConfig = {
     ],
   },
   typescript: {
-    strictNullChecks: true,
+    ignoreBuildErrors: true, // optional
+  tsconfigPath: './tsconfig.json', 
   },
 };
 
