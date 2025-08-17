@@ -13,7 +13,7 @@ export const products: Product[] = [
     {
         id: "1",
         name: "Classic Cotton T-Shirt",
-        price: 89.99,
+        price: 149.99,
         description: "Comfortable and breathable cotton t-shirt perfect for everyday wear. Available in multiple colors and sizes.",
         image: "/images/another.jpg",  // Updated path
         category: "T-Shirts",
