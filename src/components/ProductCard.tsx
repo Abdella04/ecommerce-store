@@ -4,15 +4,16 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { Product } from '@/data/products';
 import { useCart } from '@/contexts/CartContext';
-import { ShoppingCart } from 'lucide-react';
+import { ShoppingCart, CheckCircle } from 'lucide-react';
 
 interface ProductCardProps {
-    product: Product;  // Use the Product interface we imported
+    product: Product;
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
     const { addToCart } = useCart();
     const [selectedSize, setSelectedSize] = useState<string>('');
+    const [showMessage, setShowMessage] = useState(false);
 
     const handleAddToCart = () => {
         if (!selectedSize) {
@@ -20,10 +21,14 @@ export default function ProductCard({ product }: ProductCardProps) {
             return;
         }
         addToCart(product, 1, selectedSize);
+
+        // Show success message
+        setShowMessage(true);
+        setTimeout(() => setShowMessage(false), 2000); // Hide after 2s
     };
 
     return (
-        <div className="bg-white rounded-xl shadow-sm overflow-hidden hover-card-effect border border-gray-200">
+        <div className="relative bg-white rounded-xl shadow-sm overflow-hidden hover-card-effect border border-gray-200">
             <div className="relative h-[300px] overflow-hidden group">
                 <Image
                     src={product.image}
@@ -64,10 +69,11 @@ export default function ProductCard({ product }: ProductCardProps) {
                             <button
                                 key={size}
                                 onClick={() => setSelectedSize(size)}
-                                className={`px-4 py-2 text-sm font-medium rounded-lg transition-all ${selectedSize === size
+                                className={`px-4 py-2 text-sm font-medium rounded-lg transition-all ${
+                                    selectedSize === size
                                         ? 'bg-blue-600 text-white shadow-md'
                                         : 'bg-gray-50 text-gray-700 hover:bg-gray-100'
-                                    } button-effect`}
+                                } button-effect`}
                             >
                                 {size}
                             </button>
@@ -78,10 +84,11 @@ export default function ProductCard({ product }: ProductCardProps) {
                 <button
                     onClick={handleAddToCart}
                     disabled={!product.inStock || !selectedSize}
-                    className={`w-full flex items-center justify-center space-x-2 px-6 py-3 rounded-lg text-sm font-semibold transition-all ${product.inStock && selectedSize
-                        ? 'bg-blue-600 text-white hover:bg-blue-700 button-effect'
-                        : 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                        }`}
+                    className={`w-full flex items-center justify-center space-x-2 px-6 py-3 rounded-lg text-sm font-semibold transition-all ${
+                        product.inStock && selectedSize
+                            ? 'bg-blue-600 text-white hover:bg-blue-700 button-effect'
+                            : 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                    }`}
                 >
                     <ShoppingCart className="h-5 w-5" />
                     <span>
@@ -94,6 +101,14 @@ export default function ProductCard({ product }: ProductCardProps) {
                     </span>
                 </button>
             </div>
+
+            {/* ✅ Success notification */}
+            {showMessage && (
+                <div className="absolute bottom-5 left-1/2 -translate-x-1/2 bg-green-600 text-white px-4 py-2 rounded-lg flex items-center space-x-2 shadow-lg animate-fade-in-out">
+                    <CheckCircle className="w-5 h-5" />
+                    <span>Item added to cart successfully!</span>
+                </div>
+            )}
         </div>
     );
 }
